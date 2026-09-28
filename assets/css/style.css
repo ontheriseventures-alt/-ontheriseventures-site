@@ -3,16 +3,18 @@
   --navy-900: #0a1a2e;
   --navy-800: #122a47;
   --navy-700: #1c3a5e;
-  --steel-500: #4c82b5;
-  --steel-400: #6fa0cc;
+  --terracotta-500: #c15b3f;
+  --terracotta-600: #a44a31;
+  --teal-500: #1f7a6c;
+  --teal-600: #17594f;
   --amber-500: #e0a53c;
   --amber-600: #c98f2a;
   --white: #ffffff;
-  --gray-50: #f6f8fa;
-  --gray-100: #eaeef2;
-  --gray-300: #cbd3dc;
-  --gray-600: #5a6472;
-  --gray-900: #14181f;
+  --gray-50: #f7f4ef;
+  --gray-100: #ece7de;
+  --gray-300: #d2cbc0;
+  --gray-600: #6b6459;
+  --gray-900: #1c1a17;
 
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
@@ -54,17 +56,24 @@ h1, h2, h3, h4 { line-height: 1.2; font-weight: 700; letter-spacing: -0.01em; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 72px;
+  min-height: 84px;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  gap: 24px;
 }
 .brand {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   color: var(--white);
+  flex-shrink: 0;
+  line-height: 1.35;
 }
 .brand-name {
   font-weight: 800;
-  font-size: 1.15rem;
+  font-size: 1.2rem;
   letter-spacing: -0.01em;
+  white-space: nowrap;
 }
 .brand-tag {
   font-size: 0.68rem;
@@ -72,6 +81,7 @@ h1, h2, h3, h4 { line-height: 1.2; font-weight: 700; letter-spacing: -0.01em; }
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-weight: 600;
+  white-space: nowrap;
 }
 .nav-toggle {
   display: none;
@@ -101,17 +111,17 @@ h1, h2, h3, h4 { line-height: 1.2; font-weight: 700; letter-spacing: -0.01em; }
   color: var(--amber-500);
 }
 
-@media (max-width: 880px) {
+@media (max-width: 1040px) {
   .nav-toggle { display: block; }
   .main-nav {
     display: none;
     position: absolute;
-    top: 72px;
+    top: 100%;
     left: 0;
     right: 0;
     background: var(--navy-800);
     padding: 12px;
-    max-height: calc(100vh - 72px);
+    max-height: calc(100vh - 84px);
     overflow-y: auto;
   }
   .main-nav.open { display: block; }
@@ -203,7 +213,7 @@ section { padding: 88px 0; }
 .section-alt { background: var(--gray-50); }
 .section-dark { background: var(--navy-900); color: var(--white); }
 .eyebrow {
-  color: var(--amber-600);
+  color: var(--terracotta-600);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.09em;
@@ -241,7 +251,7 @@ h2 { font-size: clamp(1.6rem, 2.6vw, 2.2rem); margin-bottom: 16px; }
 .biz-card-body h3 { font-size: 1.12rem; margin-bottom: 8px; }
 .biz-card-body p { color: var(--gray-600); font-size: 0.93rem; flex: 1; margin-bottom: 16px; }
 .biz-card-link {
-  color: var(--steel-500);
+  color: var(--teal-500);
   font-weight: 600;
   font-size: 0.9rem;
 }
@@ -365,7 +375,7 @@ h2 { font-size: clamp(1.6rem, 2.6vw, 2.2rem); margin-bottom: 16px; }
   font-family:inherit; font-size:0.95rem; color:var(--gray-900); background:var(--white);
 }
 .form-field textarea { min-height:100px; resize:vertical; }
-.form-field input:focus, .form-field textarea:focus { outline:2px solid var(--steel-400); outline-offset:1px; }
+.form-field input:focus, .form-field textarea:focus { outline:2px solid var(--teal-500); outline-offset:1px; }
 .form-note { font-size:0.82rem; color:var(--gray-600); margin-top:10px; }
 
 /* ===== Sold / listing cards ===== */
@@ -379,7 +389,7 @@ h2 { font-size: clamp(1.6rem, 2.6vw, 2.2rem); margin-bottom: 16px; }
   border-radius:var(--radius); padding:18px 20px;
 }
 .sold-item h4 { font-size:1rem; margin-bottom:2px; padding-right:60px; }
-.sold-item .reg { font-size:0.8rem; color:var(--steel-500); font-weight:600; margin-bottom:8px; }
+.sold-item .reg { font-size:0.8rem; color:var(--terracotta-500); font-weight:600; margin-bottom:8px; }
 .sold-item p { font-size:0.85rem; color:var(--gray-600); }
 .status-badge {
   position:absolute; top:16px; right:16px; background:var(--navy-900); color:var(--white);
