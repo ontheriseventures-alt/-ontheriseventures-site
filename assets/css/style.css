@@ -356,6 +356,42 @@ h2 { font-size: clamp(1.6rem, 2.6vw, 2.2rem); margin-bottom: 16px; }
   color: var(--gray-600);
 }
 
+/* ===== Forms ===== */
+.request-form { max-width:600px; margin-top:8px; }
+.form-field { margin-bottom:18px; }
+.form-field label { display:block; font-weight:600; margin-bottom:6px; font-size:0.9rem; }
+.form-field input, .form-field textarea {
+  width:100%; padding:12px 14px; border:1px solid var(--gray-300); border-radius:8px;
+  font-family:inherit; font-size:0.95rem; color:var(--gray-900); background:var(--white);
+}
+.form-field textarea { min-height:100px; resize:vertical; }
+.form-field input:focus, .form-field textarea:focus { outline:2px solid var(--steel-400); outline-offset:1px; }
+.form-note { font-size:0.82rem; color:var(--gray-600); margin-top:10px; }
+
+/* ===== Sold / listing cards ===== */
+.sold-grid {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:28px;
+}
+@media (max-width: 900px) { .sold-grid { grid-template-columns:repeat(2,1fr); } }
+@media (max-width: 620px) { .sold-grid { grid-template-columns:1fr; } }
+.sold-item {
+  position:relative; background:var(--white); border:1px solid var(--gray-100);
+  border-radius:var(--radius); padding:18px 20px;
+}
+.sold-item h4 { font-size:1rem; margin-bottom:2px; padding-right:60px; }
+.sold-item .reg { font-size:0.8rem; color:var(--steel-500); font-weight:600; margin-bottom:8px; }
+.sold-item p { font-size:0.85rem; color:var(--gray-600); }
+.status-badge {
+  position:absolute; top:16px; right:16px; background:var(--navy-900); color:var(--white);
+  font-size:0.65rem; font-weight:700; letter-spacing:0.05em; padding:3px 9px; border-radius:4px;
+}
+.status-badge.current { background:var(--amber-500); color:var(--navy-900); }
+
+/* ===== Rate table ===== */
+.rate-table { width:100%; border-collapse:collapse; margin-top:8px; }
+.rate-table th, .rate-table td { text-align:left; padding:10px 14px; border-bottom:1px solid var(--gray-100); font-size:0.92rem; }
+.rate-table th { color:var(--gray-600); text-transform:uppercase; font-size:0.7rem; letter-spacing:0.06em; }
+
 /* ===== Utilities ===== */
 .text-center { text-align: center; }
 .mx-auto { margin-left: auto; margin-right: auto; }
