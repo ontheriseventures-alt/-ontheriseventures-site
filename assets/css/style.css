@@ -1,27 +1,27 @@
 /* ===== Design tokens ===== */
 :root {
-  --navy-900: #0a1a2e;
-  --navy-800: #122a47;
-  --navy-700: #1c3a5e;
-  --terracotta-500: #c15b3f;
-  --terracotta-600: #a44a31;
-  --teal-500: #1f7a6c;
-  --teal-600: #17594f;
-  --amber-500: #e0a53c;
-  --amber-600: #c98f2a;
+  --navy-900: #0a0a0a;
+  --navy-800: #161616;
+  --navy-700: #262626;
+  --terracotta-500: #b3101f;
+  --terracotta-600: #8f0c18;
+  --teal-500: #e8112d;
+  --teal-600: #c40d24;
+  --amber-500: #e8112d;
+  --amber-600: #c40d24;
   --white: #ffffff;
-  --gray-50: #f7f4ef;
-  --gray-100: #ece7de;
-  --gray-300: #d2cbc0;
-  --gray-600: #6b6459;
-  --gray-900: #1c1a17;
+  --gray-50: #f4f4f4;
+  --gray-100: #e6e6e6;
+  --gray-300: #cccccc;
+  --gray-600: #595959;
+  --gray-900: #111111;
 
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
   --max-width: 1140px;
   --radius: 10px;
-  --shadow: 0 4px 18px rgba(10, 26, 46, 0.08);
-  --shadow-lg: 0 12px 32px rgba(10, 26, 46, 0.16);
+  --shadow: 0 4px 18px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.22);
 }
 
 /* ===== Reset ===== */
@@ -178,7 +178,7 @@ h1, h2, h3, h4 { line-height: 1.2; font-weight: 700; letter-spacing: -0.01em; }
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(10,26,46,0.92) 10%, rgba(10,26,46,0.55) 100%);
+  background: linear-gradient(135deg, rgba(10,10,10,0.94) 10%, rgba(10,10,10,0.6) 100%);
 }
 .hero .container {
   position: relative;
