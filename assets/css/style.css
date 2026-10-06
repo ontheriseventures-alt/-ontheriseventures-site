@@ -466,3 +466,79 @@ h2 { font-size: clamp(1.6rem, 2.6vw, 2.2rem); margin-bottom: 16px; }
 .text-center { text-align: center; }
 .mx-auto { margin-left: auto; margin-right: auto; }
 
+
+/* ===== Aircraft tracker (Past Sales) ===== */
+.tracker { margin-top: 36px; }
+.tracker-title { font-size: 1.35rem; margin-bottom: 6px; }
+.tracker-sub { color: var(--gray-600); max-width: 680px; margin-bottom: 18px; }
+.tracker-map {
+  position: relative; max-width: 960px; margin: 0 auto; background: var(--gray-50);
+  border: 1px solid var(--gray-100); border-radius: var(--radius);
+}
+.tracker-map > img { display: block; width: 100%; height: auto; }
+.trk-pins { position: absolute; inset: 0; }
+.trk-plane {
+  position: absolute; width: 30px; height: 30px; padding: 0; border: 0; background: none;
+  transform: translate(-50%, -50%); cursor: pointer; border-radius: 50%;
+}
+.trk-plane svg { width: 100%; height: 100%; fill: var(--amber-500); stroke: #fff; stroke-width: 1.3; paint-order: stroke; filter: drop-shadow(0 1px 1.5px rgba(0,0,0,0.35)); }
+.trk-plane.lost svg, .trk-plane.landing svg { fill: var(--navy-700); }
+.trk-plane.watch svg { fill: #fff; stroke: var(--amber-500); paint-order: normal; }
+.trk-plane.flying::before {
+  content: ""; position: absolute; inset: 3px; border-radius: 50%; animation: trk-pulse 1.6s infinite;
+}
+.trk-plane.ping { animation: trk-ping 0.8s 2; z-index: 3; }
+@media (max-width: 700px) { .trk-plane { width: 24px; height: 24px; } }
+@keyframes trk-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(232,17,45,0.55); }
+  100% { box-shadow: 0 0 0 18px rgba(232,17,45,0); }
+}
+@keyframes trk-ping { 50% { transform: translate(-50%, -50%) scale(1.5); } }
+.trk-tip {
+  position: absolute; z-index: 5; pointer-events: none; opacity: 0; transition: opacity 0.12s;
+  transform: translate(-50%, calc(-100% - 20px)); background: var(--navy-900); color: #fff;
+  padding: 9px 12px; border-radius: 8px; font-size: 0.8rem; line-height: 1.4; width: max-content; max-width: 240px;
+}
+.trk-tip.show { opacity: 1; }
+.trk-tip.flip { transform: translate(-85%, calc(-100% - 20px)); }
+.tracker-status { font-size: 0.85rem; color: var(--gray-600); margin: 12px 0 14px; min-height: 1.3em; }
+.tracker-rows {
+  display: flex; flex-direction: column; border: 1px solid var(--gray-100);
+  border-radius: var(--radius); overflow: hidden; background: var(--white);
+}
+.trk-row {
+  display: grid; grid-template-columns: 170px 1.5fr 1.7fr 100px; gap: 6px 22px;
+  align-items: center; padding: 14px 18px; border-bottom: 1px solid var(--gray-100); cursor: pointer;
+}
+.trk-row:last-child { border-bottom: 0; }
+.trk-row:hover { background: var(--gray-50); }
+.trk-tail { font-weight: 700; display: flex; flex-direction: column; gap: 5px; }
+.trk-type { font-size: 0.85rem; color: var(--gray-600); font-weight: 400; }
+.trk-badge {
+  display: inline-block; width: fit-content; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.05em;
+  text-transform: uppercase; padding: 3px 8px; border-radius: 4px; background: var(--gray-100); color: var(--gray-600);
+}
+.trk-badge.flying { background: var(--amber-500); color: var(--white); }
+.trk-badge.parked { background: var(--navy-900); color: var(--white); }
+.trk-badge.landing, .trk-badge.lost { background: var(--navy-700); color: var(--white); }
+.trk-watch { background: var(--white); color: var(--terracotta-500); border: 1px solid var(--terracotta-500); }
+.trk-label {
+  display: block; font-size: 0.66rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--gray-600); margin-bottom: 2px;
+}
+.trk-val { font-size: 0.9rem; line-height: 1.35; }
+.trk-seen { font-size: 0.85rem; color: var(--gray-600); text-align: right; }
+@media (max-width: 900px) {
+  .trk-row { grid-template-columns: 1fr 1fr; }
+  .trk-seen { text-align: left; }
+}
+.tracker-watch { margin-top: 20px; }
+.tracker-watch summary { cursor: pointer; font-weight: 600; color: var(--terracotta-600); }
+.watch-form { display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end; margin-top: 12px; }
+.watch-form label { display: block; font-size: 0.8rem; font-weight: 600; margin-bottom: 4px; }
+.watch-form input {
+  padding: 10px 12px; border: 1px solid var(--gray-300); border-radius: 8px;
+  font-family: inherit; font-size: 0.95rem; width: 170px; background: var(--white);
+}
+.tracker-msg { font-size: 0.85rem; margin-top: 10px; min-height: 1.2em; }
+.tracker-credit { font-size: 0.76rem; color: var(--gray-600); margin-top: 18px; max-width: 760px; }

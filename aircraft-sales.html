@@ -102,6 +102,28 @@
     <div class="eyebrow">Track Record</div>
     <h2>Past Sales</h2>
     <p class="lead">A look at aircraft we've sold over the years.</p>
+
+    <div class="tracker" id="tracker">
+      <h3 class="tracker-title">Where Are They Now?</h3>
+      <p class="tracker-sub">The last known ADS-B position of every airplane we have owned, managed, or sold. Anything flying right now updates live.</p>
+      <div id="tracker-map" class="tracker-map"><img src="/assets/images/usa-map.svg" alt="Map of the United States showing where each aircraft was last seen" width="960" height="604"></div>
+      <div id="tracker-status" class="tracker-status" role="status"></div>
+      <div id="tracker-rows" class="tracker-rows"></div>
+
+      <details class="tracker-watch">
+        <summary>Track another tail</summary>
+        <form id="watch-form" class="watch-form">
+          <div><label for="watch-tail">N-number</label><input id="watch-tail" name="tail" type="text" placeholder="N12345" autocomplete="off" required></div>
+          <div><label for="watch-pass">Password</label><input id="watch-pass" name="password" type="password" autocomplete="off" required></div>
+          <button type="submit" class="btn btn-primary">Track for 24 hours</button>
+        </form>
+        <div id="watch-msg" class="tracker-msg" role="status"></div>
+      </details>
+
+      <p class="tracker-credit">Positions come from voluntary ADS-B broadcasts and can be delayed or incomplete. History from ADS-B Exchange; live data from adsb.lol and adsb.fi.</p>
+    </div>
+
+    <h3 class="tracker-title" style="margin-top:52px;">Sale Details</h3>
     <div class="sold-grid">
       <div class="sold-item">
         <span class="status-badge">Sold</span>
@@ -215,6 +237,7 @@
   </div>
 </footer>
 
+<script src="/assets/js/tracker.js"></script>
 <script src="/assets/js/main.js"></script>
 </body>
 </html>
