@@ -190,14 +190,13 @@
       fetch(API + '/api/sold/watch', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ tail: form.tail.value, password: form.password.value })
+        body: JSON.stringify({ tail: form.tail.value })
       })
         .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
         .then(function (res) {
           if (!res.ok) { msg.textContent = res.j.error || 'Something went wrong.'; return; }
           msg.textContent = res.j.note || (res.j.tail + ' will be tracked for 24 hours.');
           form.tail.value = '';
-          form.password.value = '';
           refresh();
         })
         .catch(function () { msg.textContent = 'Could not reach the tracker. Try again in a moment.'; });
