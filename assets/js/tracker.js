@@ -82,8 +82,22 @@
     return esc(when(f.end)) + '<br>' + end(f.depart) + ' &rarr; ' + end(f.arrive) + ' &middot; ' + dur;
   }
 
+  // Year, make and model for planes we know; others come from the ADS-B registration data.
+  var NAMES = {
+    N31309: '1973 Beechcraft Baron 55', N5495T: '1972 Piper Arrow II', N6265F: '1975 Cessna 182P',
+    N1552Z: '1989 Beechcraft Bonanza F33A', N9106U: '1976 Cessna 150M', N450JL: '1979 Piper Seneca II',
+    N5223Q: '1971 Cessna 150L', N6917S: 'Cessna 150H'
+  };
+
+  function prettyDesc(d) {
+    d = String(d || '').split('/')[0].trim();
+    return d.replace(/\b[A-Z]{4,}\b/g, function (w) { return w.charAt(0) + w.slice(1).toLowerCase(); });
+  }
+
   function typeText(a) {
-    return esc([a.year, a.desc || a.type].filter(Boolean).join(' '));
+    var name = NAMES[a.tail] || prettyDesc(a.desc) || a.type || '';
+    if (a.year && !/^\d{4}\b/.test(name)) name = a.year + ' ' + name;
+    return esc(name.trim());
   }
 
   function badges(a) {
@@ -111,7 +125,8 @@
     rowsEl.innerHTML = list.map(function (a) {
       var seen = a.status === 'flying' ? 'live' : (a.pos && a.pos.seenAt ? ago(a.pos.seenAt) : '');
       return '<div class="trk-row" data-tail="' + esc(a.tail) + '">' +
-        '<div class="trk-tail">' + esc(a.tail) + '<span class="trk-type">' + typeText(a) + '</span>' + badges(a) + '</div>' +
+        '<div class="trk-tail">' + esc(a.tail) + badges(a) + '</div>' +
+        '<div><span class="trk-label">Aircraft</span><span class="trk-val trk-model">' + (typeText(a) || 'Unknown') + '</span></div>' +
         '<div><span class="trk-label">Location</span><span class="trk-val">' + place(a) + '</span></div>' +
         '<div><span class="trk-label">Last flight</span><span class="trk-val">' + flight(a) + '</span></div>' +
         '<div class="trk-seen">' + esc(seen) + '</div></div>';

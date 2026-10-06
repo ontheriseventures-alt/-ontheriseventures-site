@@ -507,7 +507,7 @@ h2 { font-size: clamp(1.6rem, 2.6vw, 2.2rem); margin-bottom: 16px; }
   border-radius: var(--radius); overflow: hidden; background: var(--white);
 }
 .trk-row {
-  display: grid; grid-template-columns: 170px 1.5fr 1.7fr 100px; gap: 6px 22px;
+  display: grid; grid-template-columns: 150px 1.2fr 1.5fr 1.6fr 90px; gap: 6px 22px;
   align-items: center; padding: 14px 18px; border-bottom: 1px solid var(--gray-100); cursor: pointer;
 }
 .trk-row:last-child { border-bottom: 0; }
@@ -542,3 +542,4 @@ h2 { font-size: clamp(1.6rem, 2.6vw, 2.2rem); margin-bottom: 16px; }
 }
 .tracker-msg { font-size: 0.85rem; margin-top: 10px; min-height: 1.2em; }
 .tracker-credit { font-size: 0.76rem; color: var(--gray-600); margin-top: 18px; max-width: 760px; }
+.trk-model { font-weight: 600; }
