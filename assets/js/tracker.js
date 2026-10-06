@@ -87,7 +87,7 @@
     N31309: '1973 Beechcraft Baron 55', N5495T: '1972 Piper Arrow II', N6265F: '1975 Cessna 182P',
     N1552Z: '1989 Beechcraft Bonanza F33A', N9106U: '1976 Cessna 150M', N450JL: '1979 Piper Seneca II',
     N5223Q: '1971 Cessna 150L', N6917S: 'Cessna 150H', N6716T: 'Beechcraft Sierra',
-    N567MG: '2007 Cirrus SR22', N727CD: '2001 Cirrus SR22'
+    N567MG: '2007 Cirrus SR22', N727CD: '2001 Cirrus SR22', N300SA: 'Beechcraft Bonanza F33A'
   };
 
   function prettyDesc(d) {
