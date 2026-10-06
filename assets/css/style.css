@@ -465,38 +465,3 @@ h2 { font-size: clamp(1.6rem, 2.6vw, 2.2rem); margin-bottom: 16px; }
 .text-center { text-align: center; }
 .mx-auto { margin-left: auto; margin-right: auto; }
 
-/* ===== Pre-launch gate ===== */
-.otrv-gate {
-  position: fixed;
-  inset: 0;
-  z-index: 99999;
-  background: var(--navy-900);
-  color: var(--white);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
-}
-.otrv-gate-box { text-align: center; max-width: 320px; }
-.otrv-gate-title { font-weight: 800; font-size: 1.3rem; margin-bottom: 6px; }
-.otrv-gate-sub { color: var(--gray-300); font-size: 0.9rem; margin-bottom: 20px; }
-.otrv-gate-box input {
-  width: 100%;
-  padding: 12px 14px;
-  border-radius: 8px;
-  border: 1px solid var(--navy-700);
-  background: var(--navy-800);
-  color: var(--white);
-  font-size: 1rem;
-  text-align: center;
-}
-.otrv-gate-box button {
-  margin-top: 14px;
-  width: 100%;
-}
-.otrv-gate-error {
-  color: var(--amber-500);
-  margin-top: 10px;
-  font-size: 0.85rem;
-  visibility: hidden;
-}

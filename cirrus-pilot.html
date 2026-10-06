@@ -12,34 +12,6 @@
 <link rel="icon" href="/assets/images/logo.png" type="image/png">
 </head>
 <body>
-<div id="otrv-gate" class="otrv-gate">
-  <form id="otrv-gate-form" class="otrv-gate-box">
-    <div class="otrv-gate-title">On The Rise Ventures</div>
-    <div class="otrv-gate-sub">This site isn't public yet. Enter the password to continue.</div>
-    <input id="otrv-gate-input" type="password" autocomplete="off" placeholder="Password">
-    <button type="submit" class="btn btn-primary">Enter</button>
-    <div id="otrv-gate-error" class="otrv-gate-error">Incorrect password.</div>
-  </form>
-</div>
-<script>
-(function () {
-  var gate = document.getElementById('otrv-gate');
-  if (localStorage.getItem('otrv_unlocked') === '1') {
-    gate.style.display = 'none';
-    return;
-  }
-  document.getElementById('otrv-gate-form').addEventListener('submit', function (e) {
-    e.preventDefault();
-    var val = document.getElementById('otrv-gate-input').value;
-    if (val === '0228') {
-      localStorage.setItem('otrv_unlocked', '1');
-      gate.style.display = 'none';
-    } else {
-      document.getElementById('otrv-gate-error').style.visibility = 'visible';
-    }
-  });
-})();
-</script>
 
 <header class="site-header">
   <div class="container">
