@@ -135,34 +135,61 @@
         '<div class="trk-seen">' + esc(seen) + '</div></div>';
     }).join('');
 
-    // Planes at the same airport would sit on top of each other: fan them out a little.
-    var used = [];
     pinsEl.innerHTML = '';
     list.forEach(function (a) {
       if (!a.pos) return;
       var p = project(a.pos.lat, a.pos.lon);
-      var n = used.filter(function (u) { return Math.abs(u.left - p.left) < 1.6 && Math.abs(u.top - p.top) < 2.4; }).length;
-      used.push(p);
-      var left = p.left + (n % 3) * 2.2 - (n ? 1.1 : 0), top = p.top + Math.floor(n / 3) * 3.2 + (n % 2 ? 1.2 : 0);
       var pin = document.createElement('button');
       pin.type = 'button';
       pin.className = 'trk-plane ' + esc(a.status) + (a.src === 'watch' ? ' watch' : '');
       pin.setAttribute('data-tail', a.tail);
       pin.setAttribute('aria-label', a.tail + ': ' + (STATUS[a.status] || a.status));
-      pin.style.left = left + '%';
-      pin.style.top = top + '%';
+      pin.style.left = p.left + '%';
+      pin.style.top = p.top + '%';
       pin.innerHTML = PLANE;
       if (a.status === 'flying' && typeof a.pos.track === 'number') pin.firstChild.style.transform = 'rotate(' + a.pos.track + 'deg)';
       pin._tip = '<strong>' + esc(a.tail) + '</strong> ' + typeText(a) + '<br>' + place(a) +
         '<br><small>' + esc(STATUS[a.status] || a.status) + (a.pos.seenAt && a.status !== 'flying' ? ' &middot; ' + esc(ago(a.pos.seenAt)) : '') + '</small>';
       pinsEl.appendChild(pin);
     });
+    layoutPins();
   }
+
+  // Planes parked at the same airport would sit on top of each other (and can't be tapped apart on a
+  // phone), so spread any that overlap into a small ring, measured in real pixels.
+  function layoutPins() {
+    var pins = [].slice.call(pinsEl.querySelectorAll('.trk-plane'));
+    var w = pinsEl.clientWidth, h = pinsEl.clientHeight;
+    var size = pins.length ? pins[0].offsetWidth : 28;
+    var groups = [];
+    pins.forEach(function (pin) {
+      pin._dx = 0; pin._dy = 0;
+      var x = parseFloat(pin.style.left) / 100 * w, y = parseFloat(pin.style.top) / 100 * h;
+      var g = groups.filter(function (c) { return Math.abs(c.x - x) < size * 0.8 && Math.abs(c.y - y) < size * 0.8; })[0];
+      if (g) g.pins.push(pin); else groups.push({ x: x, y: y, pins: [pin] });
+    });
+    groups.forEach(function (g) {
+      var n = g.pins.length;
+      if (n < 2) return;
+      var r = Math.max(size * 0.75, (size * 1.05 * n) / (2 * Math.PI));
+      g.pins.forEach(function (pin, i) {
+        var ang = -Math.PI / 2 + (2 * Math.PI * i) / n;
+        pin._dx = Math.round(Math.cos(ang) * r);
+        pin._dy = Math.round(Math.sin(ang) * r);
+      });
+    });
+    pins.forEach(function (pin) {
+      pin.style.marginLeft = pin._dx + 'px';
+      pin.style.marginTop = pin._dy + 'px';
+    });
+  }
+
+  window.addEventListener('resize', layoutPins);
 
   function showTip(pin) {
     tipEl.innerHTML = pin._tip;
-    tipEl.style.left = pin.style.left;
-    tipEl.style.top = pin.style.top;
+    tipEl.style.left = 'calc(' + pin.style.left + ' + ' + (pin._dx || 0) + 'px)';
+    tipEl.style.top = 'calc(' + pin.style.top + ' + ' + (pin._dy || 0) + 'px)';
     tipEl.classList.toggle('flip', parseFloat(pin.style.left) > 60);
     tipEl.classList.add('show');
   }
@@ -194,8 +221,9 @@
           ? 'Live updates are catching up. Showing the most recent data.'
           : n + ' aircraft tracked. Updated ' + ago(data.updatedAt) + '.';
       })
-      .catch(function () {
-        statusEl.textContent = 'The tracker is temporarily unavailable. Please check back soon.';
+      .catch(function (err) {
+        statusEl.innerHTML = 'The tracker could not load (' + esc(err && err.message ? err.message : 'network error') +
+          '). <button type="button" class="trk-retry">Tap to retry</button>';
       });
   }
 
@@ -220,6 +248,10 @@
         .catch(function () { msg.textContent = 'Could not reach the tracker. Try again in a moment.'; });
     });
   }
+
+  statusEl.addEventListener('click', function (e) {
+    if (e.target.closest('.trk-retry')) { statusEl.textContent = 'Loading...'; refresh(); }
+  });
 
   refresh();
   setInterval(refresh, REFRESH_MS);

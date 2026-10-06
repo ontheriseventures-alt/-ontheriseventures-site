@@ -543,3 +543,5 @@ h2 { font-size: clamp(1.6rem, 2.6vw, 2.2rem); margin-bottom: 16px; }
 .tracker-msg { font-size: 0.85rem; margin-top: 10px; min-height: 1.2em; }
 .tracker-credit { font-size: 0.76rem; color: var(--gray-600); margin-top: 18px; max-width: 760px; }
 .trk-model { font-weight: 600; }
+.trk-retry { background: none; border: 0; padding: 0; font: inherit; font-weight: 600; color: var(--terracotta-600); text-decoration: underline; cursor: pointer; }
+@media (max-width: 700px) { .trk-plane { width: 28px; height: 28px; } }
